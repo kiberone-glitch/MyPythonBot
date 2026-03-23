@@ -1,1 +1,3 @@
 # MyPythonBot
+## Telegram bot
+Копия приватного репозитория MyPyBot но без токена...
