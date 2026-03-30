@@ -1,40 +1,34 @@
 import telebot
 import time
-from telebot import types
+from telebot import types 
 
 
-TOKEN = "8646730344:AAG7-qJe63NYM0vQGySW92Ag_Te2r6OIoTk"
+
+
+TOKEN = "8646730344:AAHoBzo1km21iWC5I1UxS5ot7QxyBprv98Q"
 
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start'])
 def start(message):
     markup = types.InlineKeyboardMarkup ()
-    btn = types.InlineKeyboardButton ("О боте",callback_data="about",style="primary")
-    btn2 = types.InlineKeyboardButton ("Помощь",callback_data="help",style="primary")
-    btn3 = types.InlineKeyboardButton ("Поговорить с ботом", callback_data="talk",style="primary")
-    btn4 = types.InlineKeyboardButton ("Перезапуск", callback_data="start",style="primary")
+    btn = types.InlineKeyboardButton ("О боте",callback_data="about")
+    btn2 = types.InlineKeyboardButton ("Помощь",callback_data="help")
+    btn3 = types.InlineKeyboardButton ("Поговорить с ботом", callback_data="talk")
+    btn4 = types.InlineKeyboardButton ("Перезапуск", callback_data="start")
     markup.add (btn,btn2)
     markup.add (btn3)
     markup.add (btn4)
     bot.send_chat_action (message.chat.id, 'typing')
     time.sleep (2)
-    bot.send_message(message.chat.id, "Привет, это бот Егора",reply_markup=markup) 
-
-
+    bot.send_message(message.chat.id, "Привет, это бот Егора",reply_markup=markup)
 
 @bot.callback_query_handler (func=lambda call2: True)
 def callback2 (call2):
     if call2.data == "about":
-        markup  = types.InlineKeyboardMarkup ()
-        btn = types.InlineKeyboardButton ("Назад",callback_data="start",style="success")
-        markup.add (btn)
-        bot.edit_message_text(
-        "Это бот Егора, написан на Python",
-        call2.message.chat.id,
-        call2.message.message_id,
-        reply_markup=markup
-        )
+        bot.send_chat_action (call2.message.chat.id, 'typing')
+        time.sleep (2)
+        bot.send_message (call2.message.chat.id, "Это бот Егора, написан на Python ")
     elif call2.data == "help":
         bot.send_chat_action (call2.message.chat.id, 'typing')
         time.sleep (2)
@@ -47,13 +41,9 @@ def callback2 (call2):
     elif call2.data == "talk":
         bot.send_chat_action (call2.message.chat.id, 'typing')
         time.sleep (2)
-    
-        bot.send_message (call2.message.chat.id, "Привет ✌")    
+        bot.send_message (call2.message.chat.id, "Привет ✌")
     elif call2.data == "start":
-        start (call2.message)
-
-
-          
+        start (call2.message)   
 
 @bot.message_handler(content_types=['text'])
 def chat(message):
@@ -72,9 +62,6 @@ def chat(message):
         bot.send_chat_action (message.chat.id, 'typing')
         time.sleep (2)
         bot.send_message (message.chat.id, "Прости, я не понимаю тебя :( ")
-
-
-
 
                      
 
