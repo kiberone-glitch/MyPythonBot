@@ -5,7 +5,8 @@ from telebot import types
 
 
 
-TOKEN = "8646730344:AAHoBzo1km21iWC5I1UxS5ot7QxyBprv98Q"
+TOKEN = "FuckThis"
+
 
 bot = telebot.TeleBot(TOKEN)
 
